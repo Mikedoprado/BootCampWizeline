@@ -18,7 +18,7 @@ class ListViewController: UICollectionViewController {
     private var latestSearch: String?
 
     lazy private var searchController: SearchBar = {
-        let searchController = SearchBar("Search a pokemon", delegate: nil)
+        let searchController = SearchBar("Search a pokemon", delegate: self)
         searchController.text = latestSearch
         searchController.showsCancelButton = !searchController.isSearchBarEmpty
         return searchController
@@ -166,4 +166,15 @@ class ListViewController: UICollectionViewController {
         filterContentForSearchText("")
     }
 
+}
+
+extension ListViewController: SearchBarDelegate{
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {}
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {}
+    
+    func updateSearchResults(for text: String) {
+        filterContentForSearchText(text)
+    }
 }
